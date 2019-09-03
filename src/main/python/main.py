@@ -5,6 +5,8 @@ from PySide2.QtWidgets import (QAction, qApp, QApplication, QDialog, QFileDialog
     QMainWindow, QMenu, QMenuBar, QSlider, QStyle, QToolBar)
 from PySide2.QtMultimedia import QMediaPlayer, QMediaPlaylist
 from PySide2.QtMultimediaWidgets import QVideoWidget
+from fbs_runtime.application_context.PySide2 import ApplicationContext
+
 
 class MainWindow(QMainWindow):
 
@@ -106,8 +108,9 @@ class MainWindow(QMainWindow):
         self.nextAction.setEnabled(mediaCount > 1)
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
+    appctxt = ApplicationContext()       # 1. Instantiate ApplicationContext
     mainWin = MainWindow()
     mainWin.resize(800, 600)
     mainWin.show()
-    sys.exit(app.exec_())
+    exit_code = appctxt.app.exec_()      # 2. Invoke appctxt.app.exec_()
+    sys.exit(exit_code)
